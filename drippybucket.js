@@ -81,8 +81,9 @@ class DrippyBucket {
     let obj = undefined;
     while (Date.now() < this.#lastFetched_mil + this.#rate) {}
 
-    while (obj === undefined) {
-      obj = this.#get();
+    obj = this.#get();
+    if (obj !== undefined) {
+      this.#lastFetched_mil = Date.now();
     }
 
     return obj;

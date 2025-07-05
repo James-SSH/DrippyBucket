@@ -90,6 +90,14 @@ class DrippyBucket {
   }
 
   async getAsync() {
-    return this.getBlocking();
+    let obj = undefined;
+    while (Date.now() < this.#lastFetched_mil + this.#rate) {}
+
+    while (obj === undefined) {
+      obj = this.#get();
+    }
+    this.#lastFetched_mil = Date.now();
+    
+    return obj;
   }
 }

@@ -12,7 +12,7 @@ class DrippyBucket {
   #setRateLimit(rate) {
     if (rate < 1) {
       this.rate = rate * 1000;
-      return this;
+      return;
     }
 
     this.rate = (1 / rate) * 1000;
@@ -20,8 +20,6 @@ class DrippyBucket {
       console.warn("Rate not set");
       this.rate = 0;
     }
-
-    return this;
   }
 
   constructor(rate, limit) {
@@ -76,7 +74,7 @@ class DrippyBucket {
   }
 
   #get() {
-    return this.#queue.pop_front();
+    return this.#queue.shift();
   }
 
   getBlocking() {
